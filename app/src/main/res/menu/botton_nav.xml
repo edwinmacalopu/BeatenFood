@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/comida"
+        android:icon="@drawable/ic_food"
+        android:title="Compras" />
+
+    <item
+        android:id="@+id/dos"
+        android:icon="@drawable/ic_food_off"
+        android:title="Vencidos" />
+
+    <item
+        android:id="@+id/tres"
+        android:icon="@drawable/ic_settings"
+        android:title="Ajustes" />
+
+
+</menu>

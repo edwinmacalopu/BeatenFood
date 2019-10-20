@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutregistro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:showDividers="middle"
+    android:divider="@drawable/separador"
+
+    android:padding="60dp"
+    tools:context=".interfaces.Registrarse"
+    tools:showIn="@layout/activity_registrarse">
+
+    <EditText
+        android:id="@+id/regisnombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nombre"/>
+
+    <EditText
+        android:id="@+id/regisCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+
+        android:inputType="textPersonName"
+        android:hint="Correo" />
+
+    <EditText
+        android:id="@+id/regispassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Contraseña" />
+
+    <Button
+        android:id="@+id/btnenviaregistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedbutton"
+        android:textColor="@color/colorbuttontext"
+        android:text="Registrar" />
+
+</LinearLayout>

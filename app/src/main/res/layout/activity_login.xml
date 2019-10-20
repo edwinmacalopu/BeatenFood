@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/layoutlogin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:showDividers="middle"
+    android:divider="@drawable/separador"
+    android:orientation="vertical"
+    android:padding="60dp"
+    tools:context=".interfaces.Login">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="241dp"
+        android:layout_height="172dp"
+        app:srcCompat="@drawable/iconlogin" />
+
+    <EditText
+        android:id="@+id/editcorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/bordertext"
+        android:hint="Correo"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/editpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:background="@drawable/bordertext"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btningresar"
+        android:background="@drawable/roundedbutton"
+        android:textColor="@color/colorbuttontext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingresar" />
+
+    <Button
+        android:id="@+id/btnregistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedbutton"
+        android:textColor="@color/colorbuttontext"
+        android:text="Registrarse" />
+
+
+</LinearLayout>
