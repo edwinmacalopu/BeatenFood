@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorPrimary">#4285f4</color>
+    <color name="colorPrimaryDark">#4285f4</color>
     <color name="colorAccent">#FF5252</color>
     <color name="colorbuttontext">#FFFFFF</color>
     <color name="colorbordertext">#332F2F</color>
     <color name="coloraceptado">#4CAF50</color>
     <color name="colortitle">#1E1E1F</color>
     <color name="coloretique">#0C0C0C</color>
+    <color name="colortextnombreprod">#11111D</color>
+    <color name="colorfondotextfechini">#B5D1F9</color>
+    <color name="colortextfechini">#4783DB</color>
+    <color name="colorfondotextfechfin">#FFD7B7</color>
+    <color name="colortextfechfin">#E67805</color>
+    <color name="colorbutonsblue">#4285f4</color>
 </resources>

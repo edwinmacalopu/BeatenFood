@@ -98,14 +98,14 @@ public class home extends Fragment {
                                 n.setTipoproducto(ah.getString("tipoprod"));
                                 n.setCantidad(ah.getInt("cantidad"));
                                 n.setMedidaunidad(ah.getString("medidadunid"));
-                                //  n.setFechainicio(ah.getString("fechaini"));
-                                //  n.setFechacaducidad(ah.getString("fechaven"));
+                                n.setFechainicio(ah.getString("fechaini"));
+                                n.setFechacaducidad(ah.getString("fechaven"));
 
                                 // n.setId(ah.getInt("coda"));
                                 // n.setNombre(ah.getString("noma"));
-                               /* byte[] decodedString = Base64.decode(ah.getString("foto"), Base64.DEFAULT);
+                                byte[] decodedString = Base64.decode(ah.getString("fotoprod"), Base64.DEFAULT);
                                 final Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                                n.setFoto(decodedByte);*/
+                                n.setFotoproducto(decodedByte);
 
 
                                 listalu.add(n);

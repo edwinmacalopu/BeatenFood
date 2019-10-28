@@ -9,18 +9,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20dp"
-        android:text="@string/titulohome" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciproall"
         android:layout_width="match_parent"
         android:layout_height="576dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="20dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

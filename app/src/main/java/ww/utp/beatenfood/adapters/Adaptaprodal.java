@@ -37,27 +37,31 @@ public int getItemCount() {
         }
 
 public class ViewHolderDatos extends RecyclerView.ViewHolder {
-    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechai;
+    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechaf,ipconsu;
     //,ipfechaf,ipconsu,ipfoto;
-    //ImageView imagevista;
+    ImageView imagevista;
     public ViewHolderDatos(View itemView) {
         super(itemView);
-        idpuser=itemView.findViewById(R.id.txtproiduser);
+       // idpuser=itemView.findViewById(R.id.txtproiduser);
         ipnombrep=itemView.findViewById(R.id.txtpronomprod);
-        iptprod=itemView.findViewById(R.id.txtprotipoprod);
+       // iptprod=itemView.findViewById(R.id.txtprotipoprod);
         ipcant=itemView.findViewById(R.id.txtprocant);
         ipmuni=itemView.findViewById(R.id.txtpromediuni);
-      //  imagevista=itemView.findViewById(R.id.imagenv);
+        imagevista=itemView.findViewById(R.id.imagendeprodall);
+        ipfechaf=itemView.findViewById(R.id.txtprofechaini);
+        ipconsu=itemView.findViewById(R.id.txtprofechafin);
 
     }
 
     public void asigna(Producto p) {
-        idpuser.setText(""+p.getIduser());
+        //idpuser.setText(""+p.getIduser());
         ipnombrep.setText(p.getNombreproducto());
-        iptprod.setText(p.getTipoproducto());
+       // iptprod.setText(p.getTipoproducto());
         ipcant.setText(""+p.getCantidad());
         ipmuni.setText(p.getMedidaunidad());
-        //imagevista.setImageBitmap(a.getFoto());
+        ipfechaf.setText(p.getFechainicio());
+        ipconsu.setText(p.getFechacaducidad());
+        imagevista.setImageBitmap(p.getFotoproducto());
     }
 }
 }

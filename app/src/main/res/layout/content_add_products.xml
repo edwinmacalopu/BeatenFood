@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AddProducts"
     android:showDividers="middle"
     android:divider="@drawable/separador"
+    android:layout_gravity="center"
+    android:id="@+id/layoutprodregistro"
     tools:showIn="@layout/activity_add_products">
 
     <ImageView
         android:id="@+id/imagenprod"
-        android:layout_width="323dp"
-        android:layout_height="101dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_image" />
 
     <EditText
         android:id="@+id/txtnomprod"
@@ -37,55 +40,45 @@
         android:ems="10"
         android:hint="Tipo"
         android:inputType="textPersonName" />
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/separadortextwidth"
+    android:showDividers="middle"
+    android:orientation="horizontal">
     <EditText
-        android:id="@+id/txtcantidad"
+        android:id="@+id/txtunidadmed"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/bordertext"
+        android:hint="Medida/unidad"
+
+        />
+    <EditText
+        android:id="@+id/txtpcantidad"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:background="@drawable/bordertext"
         android:hint="Cantidad"
         android:inputType="number"
         />
+</LinearLayout>
 
-    <RadioGroup
-        android:id="@+id/Rad_condi"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/cond1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Muy Fresca"
-            tools:layout_conversion_absoluteHeight="32dp"
-            tools:layout_conversion_absoluteWidth="105dp"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="402dp" />
-
-        <RadioButton
-            android:id="@+id/cond2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Normal" />
-
-        <RadioButton
-            android:id="@+id/cond3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cerca de vencer" />
-    </RadioGroup>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_gravity="center"
+        android:divider="@drawable/separadortextwidth"
+        android:showDividers="middle"
         tools:ignore="Orientation">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Fecha de Vencimiento">
 
         </TextView>
@@ -93,24 +86,17 @@
         <Button
             android:id="@+id/btnfecha"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:onClick="escfecha"
-            android:background="@drawable/ic_date"
+            android:background="@drawable/ic_calendaradd"
              />
 
-        <TextView
-            android:id="@+id/txtfechaesc"
-            android:layout_width="129dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/enviaregitroproducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/roundedbutton"
