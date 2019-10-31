@@ -13,7 +13,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciproall"
         android:layout_width="match_parent"
-        android:layout_height="576dp"
+        android:layout_height="688dp"
         android:layout_marginTop="20dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +63,8 @@ public class ViewHolderDatos extends RecyclerView.ViewHolder {
         ipmuni.setText(p.getMedidaunidad());
         ipfechaf.setText(p.getFechainicio());
         ipconsu.setText(p.getFechacaducidad());
-        imagevista.setImageBitmap(p.getFotoproducto());
+        String imageurl=p.getFotoproducto();
+        Picasso.get().load(imageurl).fit().centerInside().into(imagevista);
     }
 }
 }

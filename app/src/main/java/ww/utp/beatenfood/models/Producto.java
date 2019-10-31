@@ -12,7 +12,7 @@ public class Producto {
     String fechainicio;
     String fechacaducidad;
     boolean consumido;
-    Bitmap fotoproducto;
+    String fotoproducto;
 
     public int getIduser() {
         return iduser;
@@ -78,11 +78,11 @@ public class Producto {
         this.consumido = consumido;
     }
 
-    public Bitmap getFotoproducto() {
+    public String getFotoproducto() {
         return fotoproducto;
     }
 
-    public void setFotoproducto(Bitmap fotoproducto) {
+    public void setFotoproducto(String fotoproducto) {
         this.fotoproducto = fotoproducto;
     }
 }

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,20 +44,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddProducts extends AppCompatActivity {
-    Button btnDatePicker,guardaprod;
+    Button btnDatePicker, guardaprod;
     private int mYear, mMonth, mDay;
-    TextView nameprod,tipoprod,mediuni,cant;
+    TextView nameprod, tipoprod, mediuni, cant;
     ImageView imagefoto;
-    RadioButton est1,est2,est3,radioButton;
-    RadioGroup Grup_est;
-
+    String utf8;
     JsonObjectRequest jsobj;
-    private String url="http://nf.achkam.com/BeatenFood/Controlador.php";
+    private String url = "http://nf.achkam.com/BeatenFood/Controlador.php";
     String respuesta;
     String fechactual;
     String fechavenci;
@@ -64,6 +67,7 @@ public class AddProducts extends AppCompatActivity {
     String salida;
     JSONArray lista;
     LinearLayout layoutprodregistro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +75,14 @@ public class AddProducts extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        nameprod=findViewById(R.id.txtnomprod);
-        tipoprod=findViewById(R.id.txttipoprod);
-        mediuni=findViewById(R.id.txtunidadmed);
-        cant=findViewById(R.id.txtpcantidad);
-        guardaprod=findViewById(R.id.enviaregitroproducto);
-        btnDatePicker=(Button)findViewById(R.id.btnfecha);
-        imagefoto=findViewById(R.id.imagenprod);
-        layoutprodregistro=findViewById(R.id.layoutprodregistro);
+        nameprod = findViewById(R.id.txtnomprod);
+        tipoprod = findViewById(R.id.txttipoprod);
+        mediuni = findViewById(R.id.txtunidadmed);
+        cant = findViewById(R.id.txtpcantidad);
+        guardaprod = findViewById(R.id.enviaregitroproducto);
+        btnDatePicker = (Button) findViewById(R.id.btnfecha);
+        imagefoto = findViewById(R.id.imagenprod);
+        layoutprodregistro = findViewById(R.id.layoutprodregistro);
         fechactual = new SimpleDateFormat("yyyyMMdd").format(new Date());
         //System.out.print("FECHAAAAAAAAAA"+fechactual);
 
@@ -86,63 +90,66 @@ public class AddProducts extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
             }
         });
         guardaprod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //tag=adicionprod&txtiduser=1&txtnomprod=manzana&txttipoprod=fruta&txtcantidad=2&txtmedunidad=2kg&txtfechaini=20191026&txtfechafin=20191026&txtfotopro=ddfndldskjfewjfionvdvndgni
-                String enlace = url + "?tag=adicionprod&txtiduser=1"+"&txtnomprod=" + nameprod.getText().toString() + "&txttipoprod=" + tipoprod.getText().toString()
-                        + "&txtcantidad=" + cant.getText().toString()+ "&txtmedunidad=" + mediuni.getText().toString()+ "&txtfechaini=" + fechactual
-                        + "&txtfechafin=" + fechactual+ "&txtfotopro=" + encodedImage;
-                jsobj = new JsonObjectRequest(Request.Method.GET, enlace, null,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    respuesta = response.getString("estado").toString();
-
-                                    if (respuesta=="error"){
-                                        Snackbar snackbar = Snackbar.make(layoutprodregistro, "error en el registro", Snackbar.LENGTH_SHORT);
-                                        View snackBarView = snackbar.getView();
-                                        snackBarView.setBackgroundColor(getResources().getColor(R.color.coloraceptado));
-                                        snackbar.show();
-                                    }else{
-                                        Snackbar snackbar = Snackbar.make(layoutprodregistro, respuesta, Snackbar.LENGTH_SHORT);
-                                        View snackBarView = snackbar.getView();
-                                        snackBarView.setBackgroundColor(getResources().getColor(R.color.coloraceptado));
-                                        snackbar.show();
-
-                                        Intent intent = new Intent(AddProducts.this, Navbar.class);
-                                        startActivity(intent);
-                                    }
-
-                                    // limpia();
-                                } catch (JSONException ex) {
-                                    Snackbar snackbar = Snackbar.make(layoutprodregistro, ex.getMessage(), Snackbar.LENGTH_SHORT);
-                                    View snackBarView = snackbar.getView();
-                                    snackBarView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                                    snackbar.show();
-                                }//catch
-                            }//onresponse
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Snackbar snackbar = Snackbar.make(layoutprodregistro, "error en el registro", Snackbar.LENGTH_SHORT);
-                        View snackBarView = snackbar.getView();
-                        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                        snackbar.show();
-                        Log.w("erxx", "" + error.getMessage().toString());
-                    }
-                }//errorlistener
-                );//jsonObjectRequest
-                RequestQueue r2 = Volley.newRequestQueue(AddProducts.this);
-                r2.add(jsobj);
+                sendWorkPostRequest();
             }
 
         });
     }
+
+
+    private void sendWorkPostRequest() {
+
+        try {
+            String URL = "http://nf.achkam.com/BeatenFood/insertaimage.php";
+            JSONObject jsonBody = new JSONObject();
+
+            jsonBody.put("txtiduser", "1");
+            jsonBody.put("txtnomprod", nameprod.getText().toString());
+            jsonBody.put("txttipoprod", tipoprod.getText().toString());
+            jsonBody.put("txtcantidad", cant.getText().toString());
+            jsonBody.put("txtmedunidad", mediuni.getText().toString());
+            jsonBody.put("txtfechaini", fechactual);
+            jsonBody.put("txtfechafin", fechactual);
+            jsonBody.put("txtfotopro", encodedImage);
+
+            jsobj= new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Response:  " + error.toString(), Toast.LENGTH_SHORT).show();
+                    //onBackPressed();
+
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    final Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "text/html; charset=utf-8");
+                    headers.put("Access-Control-Allow-Methods", "POST");//put your token here
+                    return headers;
+                }
+            };
+            RequestQueue r2 = Volley.newRequestQueue(AddProducts.this);
+            r2.add(jsobj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
+
+    }
+
 
 
     public void escfecha(View v){
@@ -175,15 +182,16 @@ public class AddProducts extends AppCompatActivity {
 
 
        Bitmap foto=(Bitmap) data.getExtras().get("data");
-        //imagefoto.setImageBitmap(bitmap);
         imagefoto.setImageBitmap(foto);
-        //Bitmap fotocompr= Bitmap.createScaledBitmap(foto,alto,ancho,true);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         foto.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
         byte[] byteArrayImage = baos.toByteArray();
-
          encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+
+
+
+        //System.out.print("HOLAAAAAAAAAAAAAAAA"+hola);
+
         //System.out.print(encodedImage);
     }
 }
