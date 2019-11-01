@@ -16,6 +16,16 @@ import ww.utp.beatenfood.models.Producto;
 
 public class Adaptaprodal extends RecyclerView.Adapter<Adaptaprodal.ViewHolderDatos> {
         List<Producto> lis;
+    private OnItemClickListener mListener;
+
+    public interface  OnItemClickListener{
+        void onItemClick(int position);
+
+
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener=listener;
+    }
 
 public Adaptaprodal(List<Producto> lista ){
 
@@ -52,7 +62,17 @@ public class ViewHolderDatos extends RecyclerView.ViewHolder {
         imagevista=itemView.findViewById(R.id.imagendeprodall);
         ipfechaf=itemView.findViewById(R.id.txtprofechaini);
         ipconsu=itemView.findViewById(R.id.txtprofechafin);
-
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mListener!=null){
+                    int position=getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION){
+                        mListener.onItemClick(position);
+                    }
+                }
+            }
+        });
     }
 
     public void asigna(Producto p) {

@@ -32,6 +32,7 @@ import java.util.List;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ww.utp.beatenfood.AddProducts;
+import ww.utp.beatenfood.Detalleproducto;
 import ww.utp.beatenfood.R;
 import ww.utp.beatenfood.adapters.Adaptaprodal;
 import ww.utp.beatenfood.models.Producto;
@@ -39,8 +40,9 @@ import ww.utp.beatenfood.models.Producto;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class home extends Fragment {
-
+public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
+    public static final String EXTRA_URL = "fotoproducto";
+    public static final String EXTRA_CREATOR = "nombreproducto";
     JsonObjectRequest jsobj;
     public JSONArray lista;
     private String url="http://nf.achkam.com/BeatenFood/Controlador.php";
@@ -113,6 +115,7 @@ public class home extends Fragment {
 
                             Adaptaprodal dp=new Adaptaprodal(listalu);
                             lw.setAdapter(dp);
+                            dp.setOnItemClickListener(home.this);
                             //    Toast.makeText(getApplicationContext(),"mensaje "+respuesta,Toast.LENGTH_SHORT).show();
                         } catch (JSONException ex) {
                             Log.w("PISTAAAAA",ex.getMessage());
@@ -129,6 +132,17 @@ public class home extends Fragment {
 
         RequestQueue r2 = Volley.newRequestQueue(getContext());
         r2.add(jsobj);
+    }
+    @Override
+    public void onItemClick(int position) {
+        Intent detailIntent = new Intent(getActivity(), Detalleproducto.class);
+        Producto clickedItem = listalu.get(position);
+
+        detailIntent.putExtra(EXTRA_URL, clickedItem.getFotoproducto());
+        detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getNombreproducto());
+        // detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
+
+        startActivity(detailIntent);
     }
 
 }

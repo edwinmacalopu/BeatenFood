@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import ww.utp.beatenfood.R;
 import ww.utp.beatenfood.fragments.ajustes;
 import ww.utp.beatenfood.fragments.home;
+import ww.utp.beatenfood.fragments.reportes;
 import ww.utp.beatenfood.fragments.vencidos;
 
 import android.os.Bundle;
@@ -44,6 +45,10 @@ public class Navbar extends AppCompatActivity {
                 case R.id.dos:
                     toolbar.setTitle("Vencidos");
                     loadFragment(new vencidos());
+                    return true;
+                case R.id.reporte:
+                    toolbar.setTitle("Reporte");
+                    loadFragment(new reportes());
                     return true;
                 case R.id.tres:
                     toolbar.setTitle("Ajustes");

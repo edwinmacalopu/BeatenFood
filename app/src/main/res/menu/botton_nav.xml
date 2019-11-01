@@ -11,6 +11,11 @@
         android:title="Vencidos" />
 
     <item
+        android:id="@+id/reporte"
+        android:icon="@drawable/ic_insert_chart_black_24dp"
+        android:title="Reportes" />
+
+    <item
         android:id="@+id/tres"
         android:icon="@drawable/ic_settings"
         android:title="Ajustes" />
