@@ -1,5 +1,6 @@
 package ww.utp.beatenfood.interfaces;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,6 +42,8 @@ public class Login extends AppCompatActivity {
     String salida;
     JSONArray lista;
     LinearLayout layoutlogin;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,14 +110,15 @@ public class Login extends AppCompatActivity {
                                             alertDialog.show();
                                             // Log.w("res", "NO REGISTRADO");
                                         } else {
-                                            //si usuario existe guarda el id y pasa a la pantalla pricipal
+                                            //si usuario existe guarda el id y pasa a la pantalla principal
                                             for (int f = 0; f < lista.length(); f++) {
                                                 JSONObject ah = (JSONObject) lista.get(f);
                                                 String nombreuser=ah.getString("name");
-
-                                                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                                String mailuser=ah.getString("mail");
+                                                SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
                                                 SharedPreferences.Editor editor = pref.edit();
-                                                editor.putString("nameuser", nombreuser); // Storing string
+                                                editor.putString("nameuser", nombreuser);
+                                                editor.putString("mailuser",mailuser);// Storing string
                                                 editor.apply();
                                                 //editor.commit();
                                                 Toast.makeText(getApplicationContext(),"Bienvenido "+nombreuser, Toast.LENGTH_SHORT).show();
@@ -122,6 +126,7 @@ public class Login extends AppCompatActivity {
                                             cadena+="nombre:"+ah.getString("mail")+"\n";
                                             cadena+="saldo:"+ah.getString("saldo")+"\n";
                                             cadena+="==============\n";*/
+                                                progressDialog.dismiss();
                                             }
                                             Intent intent = new Intent(Login.this, Navbar.class);
                                             startActivity(intent);
@@ -140,12 +145,16 @@ public class Login extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
                             Log.w("erxx", "" + error.getMessage().toString());
                         }
                     });
 
                     RequestQueue r2 = Volley.newRequestQueue(Login.this);
                     r2.add(jsobj);
+                    progressDialog = new ProgressDialog(Login.this);
+                    progressDialog.setMessage("Cargando....");
+                    progressDialog.show();
 
 
                 }

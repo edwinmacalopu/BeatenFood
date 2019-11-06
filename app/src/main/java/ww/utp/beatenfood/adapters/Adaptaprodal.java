@@ -1,5 +1,6 @@
 package ww.utp.beatenfood.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public int getItemCount() {
         }
 
 public class ViewHolderDatos extends RecyclerView.ViewHolder {
-    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechaf,ipconsu;
+    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechaf,ipconsu,consum;
     //,ipfechaf,ipconsu,ipfoto;
     ImageView imagevista;
     public ViewHolderDatos(View itemView) {
@@ -62,6 +63,7 @@ public class ViewHolderDatos extends RecyclerView.ViewHolder {
         imagevista=itemView.findViewById(R.id.imagendeprodall);
         ipfechaf=itemView.findViewById(R.id.txtprofechaini);
         ipconsu=itemView.findViewById(R.id.txtprofechafin);
+        consum=itemView.findViewById(R.id.consumido);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +85,13 @@ public class ViewHolderDatos extends RecyclerView.ViewHolder {
         ipmuni.setText(p.getMedidaunidad());
         ipfechaf.setText(p.getFechainicio());
         ipconsu.setText(p.getFechacaducidad());
+        if(p.getConsumido().equals("0")){
+            consum.setText("No Consumido");
+            consum.setTextColor(Color.RED);
+        }else{
+            consum.setText("Consumido");
+            consum.setTextColor(Color.GREEN);
+        }
         String imageurl=p.getFotoproducto();
         Picasso.get().load(imageurl).fit().centerInside().into(imagevista);
     }

@@ -41,8 +41,14 @@ import ww.utp.beatenfood.models.Producto;
  * A simple {@link Fragment} subclass.
  */
 public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
-    public static final String EXTRA_URL = "fotoproducto";
-    public static final String EXTRA_CREATOR = "nombreproducto";
+    public static final String INT_URL = "fotoproducto";
+    public static final String INT_NOM = "nombreproducto";
+    public static final String INT_TIPOPRO = "tipoproducto";
+    public static final String INT_CANT = "cantidad";
+    public static final String INT_UNID = "medidaunidad";
+    public static final String INT_FECHINI= "fechainicio";
+    public static final String INT_FECHIVENC= "fechacaducidad";
+
     JsonObjectRequest jsobj;
     public JSONArray lista;
     private String url="http://nf.achkam.com/BeatenFood/Controlador.php";
@@ -103,6 +109,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
                                 n.setFechainicio(ah.getString("fechaini"));
                                 n.setFechacaducidad(ah.getString("fechaven"));
                                 n.setFotoproducto(ah.getString("fotoprod"));
+                                n.setConsumido(ah.getString("consumido"));
                                 // n.setId(ah.getInt("coda"));
                                 // n.setNombre(ah.getString("noma"));
                               /*  byte[] decodedString = Base64.decode(ah.getString("fotoprod"), Base64.DEFAULT);
@@ -138,8 +145,13 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
         Intent detailIntent = new Intent(getActivity(), Detalleproducto.class);
         Producto clickedItem = listalu.get(position);
 
-        detailIntent.putExtra(EXTRA_URL, clickedItem.getFotoproducto());
-        detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getNombreproducto());
+        detailIntent.putExtra(INT_URL, clickedItem.getFotoproducto());
+        detailIntent.putExtra(INT_NOM, clickedItem.getNombreproducto());
+        detailIntent.putExtra(INT_TIPOPRO, clickedItem.getTipoproducto());
+        detailIntent.putExtra(INT_CANT, clickedItem.getCantidad());
+        detailIntent.putExtra(INT_UNID, clickedItem.getMedidaunidad());
+        detailIntent.putExtra(INT_FECHINI, clickedItem.getFechainicio());
+        detailIntent.putExtra(INT_FECHIVENC, clickedItem.getFechacaducidad());
         // detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
 
         startActivity(detailIntent);

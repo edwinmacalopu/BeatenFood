@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:showDividers="middle"
+    android:layout_margin="10dp"
+    android:divider="@drawable/separador"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Detalleproducto"
     tools:showIn="@layout/activity_detalleproducto">
@@ -15,13 +17,108 @@
         android:id="@+id/imagendetalle"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="20sp"
         app:srcCompat="@drawable/ic_image" />
 
-    <TextView
-        android:id="@+id/detallenombre"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="230dp"
+        >
+
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20sp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unidad :" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Compra" />
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Vencimiento" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/detallenombre"
+                    android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:text="nombre" />
+                <TextView
+                    android:id="@+id/detalleTipo"
+                    android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:text="tipo" />
+                <TextView
+                    android:id="@+id/detalleCantidad"
+                    android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:text="cantidad" />
+                <TextView
+                    android:id="@+id/detalleUnidad"
+                    android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:text="unidad" />
+                <TextView
+                    android:id="@+id/detalleFechacomp"
+                    android:layout_width="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:text="fechacompra" />
+                <TextView
+                    android:id="@+id/detalleFechacaduc"
+                    android:textSize="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="fechacaducidad" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

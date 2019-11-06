@@ -47,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,14 +56,14 @@ import java.util.Map;
 public class AddProducts extends AppCompatActivity {
     Button btnDatePicker, guardaprod;
     private int mYear, mMonth, mDay;
-    TextView nameprod, tipoprod, mediuni, cant;
+    TextView nameprod, tipoprod, mediuni, cant,fechavenci;
     ImageView imagefoto;
     String utf8;
     JsonObjectRequest jsobj;
     private String url = "http://nf.achkam.com/BeatenFood/Controlador.php";
     String respuesta;
     String fechactual;
-    String fechavenci;
+
     String encodedImage;
     String salida;
     JSONArray lista;
@@ -82,6 +83,7 @@ public class AddProducts extends AppCompatActivity {
         guardaprod = findViewById(R.id.enviaregitroproducto);
         btnDatePicker = (Button) findViewById(R.id.btnfecha);
         imagefoto = findViewById(R.id.imagenprod);
+        fechavenci=findViewById(R.id.capturafechavenc);
         layoutprodregistro = findViewById(R.id.layoutprodregistro);
         fechactual = new SimpleDateFormat("yyyyMMdd").format(new Date());
         //System.out.print("FECHAAAAAAAAAA"+fechactual);
@@ -115,7 +117,7 @@ public class AddProducts extends AppCompatActivity {
             jsonBody.put("txtcantidad", cant.getText().toString());
             jsonBody.put("txtmedunidad", mediuni.getText().toString());
             jsonBody.put("txtfechaini", fechactual);
-            jsonBody.put("txtfechafin", fechactual);
+            jsonBody.put("txtfechafin", fechavenci.getText().toString());
             jsonBody.put("txtfotopro", encodedImage);
 
             jsobj= new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
@@ -163,14 +165,16 @@ public class AddProducts extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
+                        fechavenci.setText(String.valueOf(year)+String.valueOf(monthOfYear+1)+String.valueOf(dayOfMonth));
+                        //fechavenci =(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                        fechavenci=String.valueOf(dayOfMonth+1);
-                        System.out.print(fechavenci);
                        // fechesc.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                         btnDatePicker.setBackgroundResource(R.drawable.ic_calendarcheck);
 
                     }
+
                 }, mYear, mMonth, mDay);
+        System.out.print(fechavenci);
         datePickerDialog.show();
 
     }

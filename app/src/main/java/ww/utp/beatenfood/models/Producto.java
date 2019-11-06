@@ -11,7 +11,7 @@ public class Producto {
     String medidaunidad;
     String fechainicio;
     String fechacaducidad;
-    boolean consumido;
+    String consumido;
     String fotoproducto;
 
     public int getIduser() {
@@ -70,11 +70,11 @@ public class Producto {
         this.fechacaducidad = fechacaducidad;
     }
 
-    public boolean isConsumido() {
+    public String getConsumido() {
         return consumido;
     }
 
-    public void setConsumido(boolean consumido) {
+    public void setConsumido(String consumido) {
         this.consumido = consumido;
     }
 
