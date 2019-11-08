@@ -41,6 +41,7 @@ import ww.utp.beatenfood.models.Producto;
  * A simple {@link Fragment} subclass.
  */
 public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
+    public static final String INT_IDPROD = "idproducto";
     public static final String INT_URL = "fotoproducto";
     public static final String INT_NOM = "nombreproducto";
     public static final String INT_TIPOPRO = "tipoproducto";
@@ -101,6 +102,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
                             for(int f=0;f<lista.length();f++){
                                 JSONObject ah=(JSONObject)lista.get(f);
                                 Producto n=new Producto();
+                                n.setIdprod(ah.getInt("idprod"));
                                 n.setIduser(ah.getInt("iduser"));
                                 n.setNombreproducto(ah.getString("nombreprod"));
                                 n.setTipoproducto(ah.getString("tipoprod"));
@@ -152,6 +154,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
         detailIntent.putExtra(INT_UNID, clickedItem.getMedidaunidad());
         detailIntent.putExtra(INT_FECHINI, clickedItem.getFechainicio());
         detailIntent.putExtra(INT_FECHIVENC, clickedItem.getFechacaducidad());
+        detailIntent.putExtra(INT_IDPROD, clickedItem.getIdprod());
         // detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
 
         startActivity(detailIntent);

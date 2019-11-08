@@ -1,9 +1,9 @@
 package ww.utp.beatenfood.models;
 
-import android.graphics.Bitmap;
+
 
 public class Producto {
-
+    int idprod;
     int iduser;
     String nombreproducto;
     String tipoproducto;
@@ -13,6 +13,14 @@ public class Producto {
     String fechacaducidad;
     String consumido;
     String fotoproducto;
+
+    public int getIdprod() {
+        return idprod;
+    }
+
+    public void setIdprod(int idprod) {
+        this.idprod = idprod;
+    }
 
     public int getIduser() {
         return iduser;
