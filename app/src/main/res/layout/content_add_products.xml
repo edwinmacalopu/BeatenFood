@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     android:padding="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -40,31 +41,31 @@
         android:ems="10"
         android:hint="Tipo"
         android:inputType="textPersonName" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:divider="@drawable/separadortextwidth"
-    android:showDividers="middle"
-    android:orientation="horizontal">
-    <EditText
-        android:id="@+id/txtunidadmed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:background="@drawable/bordertext"
-        android:hint="Medida/unidad"
-
-        />
-    <EditText
-        android:id="@+id/txtpcantidad"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:background="@drawable/bordertext"
-        android:hint="Cantidad"
-        android:inputType="number"
-        />
-</LinearLayout>
+        android:divider="@drawable/separadortextwidth"
+        android:showDividers="middle"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/txtunidadmed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/bordertext"
+            android:hint="Medida/unidad"
+
+            />
+        <EditText
+            android:id="@+id/txtpcantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/bordertext"
+            android:hint="Cantidad"
+            android:inputType="number"
+            />
+    </LinearLayout>
 
 
     <LinearLayout
@@ -90,7 +91,7 @@
             android:layout_weight="1"
             android:onClick="escfecha"
             android:background="@drawable/ic_calendaradd"
-             />
+            />
 
 
     </LinearLayout>

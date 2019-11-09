@@ -49,6 +49,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
     public static final String INT_UNID = "medidaunidad";
     public static final String INT_FECHINI= "fechainicio";
     public static final String INT_FECHIVENC= "fechacaducidad";
+    public static final String INT_CONSUM= "consumido";
 
     JsonObjectRequest jsobj;
     public JSONArray lista;
@@ -73,14 +74,14 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
 
         FloatingActionButton floatingActionButton=(FloatingActionButton)view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                                                    @Override
+                                                    public void onClick(View v) {
                 /*Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                Intent intent = new Intent(getActivity(), AddProducts.class);
-                startActivity(intent);
-            }
-        }
+                                                        Intent intent = new Intent(getActivity(), AddProducts.class);
+                                                        startActivity(intent);
+                                                    }
+                                                }
 
 
 
@@ -128,7 +129,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
                             //    Toast.makeText(getApplicationContext(),"mensaje "+respuesta,Toast.LENGTH_SHORT).show();
                         } catch (JSONException ex) {
                             Log.w("PISTAAAAA",ex.getMessage());
-                           //  res.setText("respuesta "+ex.getMessage());
+                            //  res.setText("respuesta "+ex.getMessage());
                         }
 
                     }
@@ -155,6 +156,7 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
         detailIntent.putExtra(INT_FECHINI, clickedItem.getFechainicio());
         detailIntent.putExtra(INT_FECHIVENC, clickedItem.getFechacaducidad());
         detailIntent.putExtra(INT_IDPROD, clickedItem.getIdprod());
+        detailIntent.putExtra(INT_CONSUM, clickedItem.getConsumido());
         // detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
 
         startActivity(detailIntent);

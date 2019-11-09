@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ww.utp.beatenfood.R;
 import ww.utp.beatenfood.models.Producto;
 
-public class Adaptaprodal extends RecyclerView.Adapter<Adaptaprodal.ViewHolderDatos> {
+public class Adaptaprodvenci extends RecyclerView.Adapter<Adaptaprodvenci.ViewHolderDatos> {
         List<Producto> lis;
     private OnItemClickListener mListener;
 
@@ -28,13 +28,13 @@ public class Adaptaprodal extends RecyclerView.Adapter<Adaptaprodal.ViewHolderDa
         mListener=listener;
     }
 
-public Adaptaprodal(List<Producto> lista ){
+public Adaptaprodvenci(List<Producto> lista ){
 
         lis=lista;
         }
 @Override
 public ViewHolderDatos onCreateViewHolder(ViewGroup parent, int viewType) {
-        View ver= LayoutInflater.from(parent.getContext()).inflate(R.layout.vistaprodall,null,false);
+        View ver= LayoutInflater.from(parent.getContext()).inflate(R.layout.vistaprodvencidos,null,false);
 
         return new ViewHolderDatos(ver);
         }
@@ -50,20 +50,21 @@ public int getItemCount() {
         }
 
 public class ViewHolderDatos extends RecyclerView.ViewHolder {
-    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechaf,ipconsu,consum;
+    TextView idpuser, ipnombrep,iptprod,ipcant,ipmuni,ipfechaf,ipconsu,consum,idproddd;
     //,ipfechaf,ipconsu,ipfoto;
     ImageView imagevista;
     public ViewHolderDatos(View itemView) {
         super(itemView);
        // idpuser=itemView.findViewById(R.id.txtproiduser);
-        ipnombrep=itemView.findViewById(R.id.txtpronomprod);
+        ipnombrep=itemView.findViewById(R.id.txtpronomprodvenci);
        // iptprod=itemView.findViewById(R.id.txtprotipoprod);
-        ipcant=itemView.findViewById(R.id.txtprocant);
-        ipmuni=itemView.findViewById(R.id.txtpromediuni);
-        imagevista=itemView.findViewById(R.id.imagendeprodall);
-        ipfechaf=itemView.findViewById(R.id.txtprofechaini);
-        ipconsu=itemView.findViewById(R.id.txtprofechafin);
-        consum=itemView.findViewById(R.id.consumido);
+        ipcant=itemView.findViewById(R.id.txtprocantvenci);
+        ipmuni=itemView.findViewById(R.id.txtpromediunivenci);
+        idproddd=itemView.findViewById(R.id.txtprodvenci);
+        imagevista=itemView.findViewById(R.id.imagendeprodallvenci);
+        ipfechaf=itemView.findViewById(R.id.txtprofechainivenci);
+        ipconsu=itemView.findViewById(R.id.txtprofechafinvenci);
+        consum=itemView.findViewById(R.id.consumidovenci);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,12 +83,14 @@ public class ViewHolderDatos extends RecyclerView.ViewHolder {
         ipnombrep.setText(p.getNombreproducto());
        // iptprod.setText(p.getTipoproducto());
         ipcant.setText(""+p.getCantidad());
+        idproddd.setText(""+p.getIdprod());
         ipmuni.setText(p.getMedidaunidad());
         ipfechaf.setText(p.getFechainicio());
         ipconsu.setText(p.getFechacaducidad());
         if(p.getConsumido().equals("0")){
             consum.setText("No Consumido");
             consum.setTextColor(Color.parseColor("#FF5252"));
+
         }else{
             consum.setText("Consumido");
             consum.setTextColor(Color.parseColor("#4285f4"));

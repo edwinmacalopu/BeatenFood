@@ -26,6 +26,7 @@ import ww.utp.beatenfood.interfaces.Login;
 import ww.utp.beatenfood.interfaces.Navbar;
 import ww.utp.beatenfood.interfaces.Registrarse;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -66,7 +67,7 @@ public class AddProducts extends AppCompatActivity {
 
     String encodedImage;
     String salida;
-    JSONArray lista;
+    public  JSONArray lista;
     LinearLayout layoutprodregistro;
 
     @Override
@@ -123,8 +124,20 @@ public class AddProducts extends AppCompatActivity {
             jsobj= new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
-                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                    lista = response.optJSONArray("dato");
+                    Snackbar snackbar = Snackbar.make(layoutprodregistro, "Producto Agregado", Snackbar.LENGTH_SHORT);
+                    View snackBarView = snackbar.getView();
+                    snackBarView.setBackgroundColor(getResources().getColor(R.color.coloraceptado));
+                    snackbar.show();
+                    //Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            Intent intent = new Intent(AddProducts.this, Navbar.class);
+                            startActivity(intent);
+                            //que hacer despues de 2 segundos
+                        }
+                    }, 2000);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -168,7 +181,7 @@ public class AddProducts extends AppCompatActivity {
                         fechavenci.setText(String.valueOf(year)+String.valueOf(monthOfYear+1)+String.valueOf(dayOfMonth));
                         //fechavenci =(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                       // fechesc.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        // fechesc.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                         btnDatePicker.setBackgroundResource(R.drawable.ic_calendarcheck);
 
                     }
@@ -185,12 +198,12 @@ public class AddProducts extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-       Bitmap foto=(Bitmap) data.getExtras().get("data");
+        Bitmap foto=(Bitmap) data.getExtras().get("data");
         imagefoto.setImageBitmap(foto);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         foto.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] byteArrayImage = baos.toByteArray();
-         encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+        encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
 
 
 
@@ -199,3 +212,4 @@ public class AddProducts extends AppCompatActivity {
         //System.out.print(encodedImage);
     }
 }
+

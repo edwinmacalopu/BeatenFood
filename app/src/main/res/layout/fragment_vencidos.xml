@@ -6,13 +6,15 @@
     android:showDividers="middle"
     android:divider="@drawable/separador"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:background="@color/fondo"
+    android:padding="10dp"
     tools:context=".fragments.vencidos">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reciprovenci"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/prodv" />
+        android:layout_height="688dp"
+        android:layout_marginTop="20dp" />
 
 </FrameLayout>

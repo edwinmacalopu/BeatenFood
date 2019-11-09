@@ -43,7 +43,10 @@ public class Login extends AppCompatActivity {
     JSONArray lista;
     LinearLayout layoutlogin;
     ProgressDialog progressDialog;
+    @Override
+    public void onBackPressed() {
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +122,7 @@ public class Login extends AppCompatActivity {
                                                 SharedPreferences.Editor editor = pref.edit();
                                                 editor.putString("nameuser", nombreuser);
                                                 editor.putString("mailuser",mailuser);// Storing string
+                                                editor.putString("session","activo");/// Storing string
                                                 editor.apply();
                                                 //editor.commit();
                                                 Toast.makeText(getApplicationContext(),"Bienvenido "+nombreuser, Toast.LENGTH_SHORT).show();

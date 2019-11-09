@@ -9,6 +9,7 @@
     android:layout_margin="10dp"
     android:gravity="center_horizontal"
     android:background="@color/fondo"
+    android:id="@+id/layoutdetallepro"
     android:divider="@drawable/separador"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Detalleproducto"
