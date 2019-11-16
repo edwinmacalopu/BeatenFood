@@ -43,11 +43,13 @@ public class ajustes extends Fragment {
         // Inflate the layout for this fragment
         String nombrewq ="";
         String mailusershare="";
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
         //  String name = sharedPreferences.getString(“signature”, "");
         // SharedPreferences prefs = this.getActivity().getSharedPreferences("pref",0);
         nombrewq=sharedPreferences.getString("nameuser","SIN DATOS");
         mailusershare=sharedPreferences.getString("mailuser","SIN DATOS");
+
         View view= inflater.inflate(R.layout.fragment_ajustes, container, false);
         nameuser=view.findViewById(R.id.txtnombreuser);
         mailuser=view.findViewById(R.id.txtmailuserset);

@@ -107,12 +107,16 @@ public class AddProducts extends AppCompatActivity {
 
 
     private void sendWorkPostRequest() {
+        SharedPreferences sharedPreferences =getApplication().getSharedPreferences("MyPref", MODE_PRIVATE);
+        //  String name = sharedPreferences.getString(“signature”, "");
+        // SharedPreferences prefs = this.getActivity().getSharedPreferences("pref",0);
+        String iduser=sharedPreferences.getString("iduser","SIN DATOS");
 
         try {
             String URL = "http://nf.achkam.com/BeatenFood/insertaimage.php";
             JSONObject jsonBody = new JSONObject();
 
-            jsonBody.put("txtiduser", "1");
+            jsonBody.put("txtiduser", iduser);
             jsonBody.put("txtnomprod", nameprod.getText().toString());
             jsonBody.put("txttipoprod", tipoprod.getText().toString());
             jsonBody.put("txtcantidad", cant.getText().toString());
@@ -178,7 +182,16 @@ public class AddProducts extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        fechavenci.setText(String.valueOf(year)+String.valueOf(monthOfYear+1)+String.valueOf(dayOfMonth));
+                        int month= monthOfYear+1;
+                        String fm=""+month;
+                        String fd=""+dayOfMonth;
+                        if(month<10){
+                            fm ="0"+month;
+                        }
+                        if (dayOfMonth<10){
+                            fd="0"+dayOfMonth;
+                        }
+                        fechavenci.setText(String.valueOf(year)+fm+fd);
                         //fechavenci =(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                         // fechesc.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);

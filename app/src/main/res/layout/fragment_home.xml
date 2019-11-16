@@ -11,11 +11,42 @@
     <!-- TODO: Update blank fragment layout -->
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Textfechaescog"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedtextfechhome"
+            android:gravity="center"
+            android:text="fecha"
+            android:textColor="@color/colorbuttontext"
+            />
+
+        <Button
+            android:id="@+id/btnporfecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="bUSCAR" />
+
+        <Button
+            android:id="@+id/btntodos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TODOS" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciproall"
         android:layout_width="match_parent"
         android:layout_height="688dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="60dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

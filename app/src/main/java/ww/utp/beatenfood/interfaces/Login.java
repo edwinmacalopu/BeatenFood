@@ -116,10 +116,12 @@ public class Login extends AppCompatActivity {
                                             //si usuario existe guarda el id y pasa a la pantalla principal
                                             for (int f = 0; f < lista.length(); f++) {
                                                 JSONObject ah = (JSONObject) lista.get(f);
+                                                String iduser=ah.getString("id");
                                                 String nombreuser=ah.getString("name");
                                                 String mailuser=ah.getString("mail");
                                                 SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
                                                 SharedPreferences.Editor editor = pref.edit();
+                                                editor.putString("iduser", iduser);
                                                 editor.putString("nameuser", nombreuser);
                                                 editor.putString("mailuser",mailuser);// Storing string
                                                 editor.putString("session","activo");/// Storing string

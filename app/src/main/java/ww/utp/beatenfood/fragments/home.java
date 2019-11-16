@@ -1,7 +1,9 @@
 package ww.utp.beatenfood.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,6 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,7 +32,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +45,8 @@ import ww.utp.beatenfood.Detalleproducto;
 import ww.utp.beatenfood.R;
 import ww.utp.beatenfood.adapters.Adaptaprodal;
 import ww.utp.beatenfood.models.Producto;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,13 +61,18 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
     public static final String INT_FECHINI= "fechainicio";
     public static final String INT_FECHIVENC= "fechacaducidad";
     public static final String INT_CONSUM= "consumido";
-
+    private int mYear, mMonth, mDay;
     JsonObjectRequest jsobj;
     public JSONArray lista;
+    String fechactual;
     private String url="http://nf.achkam.com/BeatenFood/Controlador.php";
     List<Producto> listalu;
     RecyclerView lw;
-
+    String iduser;
+    TextView fechaescogi;
+    Button botontodos,botonfeches;
+    String fechaes;
+    String enlaces;
     public home() {
         // Required empty public constructor
 
@@ -66,11 +82,41 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+        //  String name = sharedPreferences.getString(“signature”, "");
+        // SharedPreferences prefs = this.getActivity().getSharedPreferences("pref",0);
+       iduser=sharedPreferences.getString("iduser","SIN DATOS");
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home, container, false);
         lw=view.findViewById(R.id.reciproall);
         lw.setLayoutManager(new LinearLayoutManager(getContext()));
+        fechaescogi=view.findViewById(R.id.Textfechaescog);
+        fechactual=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        fechaes=new SimpleDateFormat("yyyyMMdd").format(new Date());
+        fechaescogi.setText(fechactual);
+        fechaescogi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                escfecha();
+            }
+        });
+        botontodos=view.findViewById(R.id.btntodos);
+        botonfeches=view.findViewById(R.id.btnporfecha);
+        botonfeches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                consulta("porfecha");
+
+            }
+        });
+        botontodos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                consulta("");
+            }
+        });
 
         FloatingActionButton floatingActionButton=(FloatingActionButton)view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -86,13 +132,60 @@ public class home extends Fragment implements Adaptaprodal.OnItemClickListener {
 
 
         );
-        consulta();
+        consulta("");
         return view;
 
     }
-    private void consulta(){
+    public void escfecha(){
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        fechaescogi.setText(String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year));
+                        int month= monthOfYear+1;
+                        String fm=""+month;
+                        String fd=""+dayOfMonth;
+                        if(month<10){
+                            fm ="0"+month;
+                        }
+                        if (dayOfMonth<10){
+                            fd="0"+dayOfMonth;
+                        }
+                        fechaes=(year+""+fm+""+fd);
+
+
+
+                    }
+
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.show();
+
+    }
+
+
+    private void consulta(String tipo){
+
+
         listalu= new ArrayList<>();
-        String enlaces = url+"?tag=listadoporuser&txtiduser=1";
+        if (tipo.equals("porfecha")){
+            /*String fecha=fechaescogi.getText().toString();
+            String d=fecha.substring(0,2);
+            String m=fecha.substring(3,5);
+            String a=fecha.substring(6,10);
+             fecha=a+""+m+""+d;*/
+
+            enlaces = url+"?tag=listadoporuserfecha&txtiduser="+iduser+"&txtfechaprod="+fechaes;
+        }else{
+
+            enlaces = url+"?tag=listadoporuser&txtiduser="+iduser;
+        }
+
         jsobj=new JsonObjectRequest(Request.Method.GET, enlaces, null,
                 new Response.Listener<JSONObject>() {
                     @Override
