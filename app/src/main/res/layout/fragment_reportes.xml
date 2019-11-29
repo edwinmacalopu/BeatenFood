@@ -22,6 +22,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:background="@drawable/bordertext"
             android:layout_weight="1" />
         <Button
             android:id="@+id/btnreporte"
@@ -35,15 +36,44 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_margin="8dp"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+
 
         tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Reporte por Estado"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/coloretique"
+            android:textStyle="bold"
+            />
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficopastel"
             android:layout_width="match_parent"
-            android:layout_height="500dp"></com.github.mikephil.charting.charts.BarChart>
+            android:layout_marginTop="25dp"
+
+            android:layout_height="250dp"></com.github.mikephil.charting.charts.BarChart>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="300dp"
+            android:textColor="@color/coloretique"
+            android:layout_marginLeft="20dp"
+            android:text="Reporte por Tipo de Producto"
+            android:textStyle="bold"
+            />
+
+        <com.github.mikephil.charting.charts.PieChart
+
+            android:id="@+id/piechart"
+            android:layout_marginTop="330dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
     </androidx.cardview.widget.CardView>
 
 

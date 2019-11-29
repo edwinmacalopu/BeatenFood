@@ -14,6 +14,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+
+        android:divider="@drawable/separadortextwidth"
+        android:showDividers="middle"
         android:orientation="horizontal">
 
         <TextView
@@ -32,12 +35,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/roundedhome"
+            android:textColor="@color/colorbuttontext"
             android:text="bUSCAR" />
 
         <Button
             android:id="@+id/btntodos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundedhome"
+            android:textColor="@color/colorbuttontext"
             android:layout_weight="1"
             android:text="TODOS" />
     </LinearLayout>

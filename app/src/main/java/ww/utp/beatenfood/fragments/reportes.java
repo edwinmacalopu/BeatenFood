@@ -22,10 +22,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
@@ -46,12 +49,15 @@ import ww.utp.beatenfood.models.Producto;
 public class reportes extends Fragment {
     Button mes;
     BarChart barChart;
+    PieChart pieChart;
     JsonObjectRequest jsobj;
     public JSONArray lista2;
     private String url2="http://nf.achkam.com/BeatenFood/Controlador.php";
     List<Producto> listalu2;
     RecyclerView lw2;
     int consumido,vencido;
+    int  carne,fruta,lacteo,vegetal,bebida,otros;
+
     Spinner spimes;
     String mesconsulta;
     private int mYear, mMonth, mDay;
@@ -68,7 +74,7 @@ public class reportes extends Fragment {
         barChart=view.findViewById(R.id.graficopastel);
         mes=view.findViewById(R.id.btnreporte);
         spimes= view.findViewById(R.id.spinner);
-
+        pieChart = view.findViewById(R.id.piechart);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.mes_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -142,7 +148,7 @@ public class reportes extends Fragment {
     }
 
 
-    private void  creargraficopastel(){
+    private void  creargraficobarras(){
         String cons=String.valueOf(consumido);
         String venc=String.valueOf(vencido);
         //  barChart.animateY(5000);
@@ -164,6 +170,41 @@ public class reportes extends Fragment {
         bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data);
     }
+    private void  creargraficopastel(){
+            float carn=Float.parseFloat(String.valueOf(carne));
+            float frut=Float.parseFloat(String.valueOf(fruta));
+             float lact=Float.parseFloat(String.valueOf(lacteo));
+        float vege=Float.parseFloat(String.valueOf(vegetal));
+        float bebid=Float.parseFloat(String.valueOf(bebida));
+        float otro=Float.parseFloat(String.valueOf(otros));
+
+        ArrayList NoOfEmp = new ArrayList();
+
+        NoOfEmp.add(new Entry(carn, 0));
+        NoOfEmp.add(new Entry(frut, 1));
+        NoOfEmp.add(new Entry(lact, 2));
+        NoOfEmp.add(new Entry(vege, 3));
+        NoOfEmp.add(new Entry(bebid, 4));
+        NoOfEmp.add(new Entry(otro, 5));
+
+
+
+        ArrayList year = new ArrayList();
+
+        year.add("CARNE");
+        year.add("FRUTA");
+        year.add("LACTEO");
+        year.add("VEGETAL");
+        year.add("BEBIDA");
+        year.add("OTROS");
+        PieDataSet dataSet = new PieDataSet(NoOfEmp, "Tipos");
+        pieChart.animateXY(1500, 1500);
+        PieData data = new PieData(year, dataSet);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieChart.setData(data);
+
+
+    }
     private void consulta(){
         consumido=0;
         vencido=0;
@@ -179,13 +220,31 @@ public class reportes extends Fragment {
                             for(int f=0;f<lista2.length();f++){
                                 JSONObject ah=(JSONObject)lista2.get(f);
                                 String cantidad=ah.getString("consumido");
-
+                                String tipoprod=ah.getString("tipoprod");
                                 if (cantidad.equals("1")){
                                     //  Toast.makeText(getContext(),"+1", Toast.LENGTH_SHORT).show();
                                     consumido++;
                                 }else{
                                     vencido++;
                                 }
+
+
+                                if(tipoprod.equals("CARNE")){
+                                    carne++;
+                                }else if(tipoprod.equals("FRUTA"))
+                                 {
+                                    fruta++;
+                                }else if(tipoprod.equals("LACTEO")){
+                                    lacteo++;
+                                }else if(tipoprod.equals("VEGETAL")){
+                                    vegetal++;
+
+                                }else if (tipoprod.equals("BEBIDA")){
+                                    bebida++;
+                                }else if (tipoprod.equals("OTROS")){
+                                    otros++;
+                                }
+
                                 // n.setId(ah.getInt("coda"));
                                 // n.setNombre(ah.getString("noma"));
                               /*  byte[] decodedString = Base64.decode(ah.getString("fotoprod"), Base64.DEFAULT);
@@ -195,6 +254,7 @@ public class reportes extends Fragment {
 
                                 //  listalu2.add(n);
                             }
+                            creargraficobarras();
                             creargraficopastel();
                             // Adaptaprodal dp=new Adaptaprodal(listalu2);
                             //lw2.setAdapter(dp);

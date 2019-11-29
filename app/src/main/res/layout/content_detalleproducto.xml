@@ -24,6 +24,20 @@
         android:layout_marginTop="20sp"
         app:srcCompat="@drawable/ic_image" />
 
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnrecetas"
+            android:background="@drawable/roundedbutton"
+            android:textColor="@color/fondo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recetas" />
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="250dp"

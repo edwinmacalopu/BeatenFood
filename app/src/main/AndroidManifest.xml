@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ww.utp.beatenfood">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +16,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".recetas"
+            android:label="@string/title_activity_recetas"
+            android:parentActivityName=".Detalleproducto"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ww.utp.beatenfood.Detalleproducto" />
+        </activity>
         <activity
             android:name=".Detalleproducto"
             android:label="@string/title_activity_detalleproducto"
@@ -51,10 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name= ".notificaciones.NotificationPublisher" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

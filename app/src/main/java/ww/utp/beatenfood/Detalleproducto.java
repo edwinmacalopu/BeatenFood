@@ -55,7 +55,8 @@ public class Detalleproducto extends AppCompatActivity {
     Switch aSwitch;
     Integer iddelproducto;
     String consumido;
-    Button buttondetalle;
+    String nameprod;
+    Button buttondetalle,recetas;
     Boolean chekactivo;
     JsonObjectRequest jsobj;
     public JSONArray lista;
@@ -70,7 +71,7 @@ public class Detalleproducto extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent=getIntent();
         String imageurl=intent.getStringExtra(INT_URL);
-        String nameprod=intent.getStringExtra(INT_NOM);
+         nameprod=intent.getStringExtra(INT_NOM);
         String tipoprod=intent.getStringExtra(INT_TIPOPRO);
         int canti=intent.getIntExtra(INT_CANT,0);
         String fechain=intent.getStringExtra(INT_FECHINI);
@@ -95,12 +96,29 @@ public class Detalleproducto extends AppCompatActivity {
         fechai.setText(": "+fechain);
         fechav.setText(": "+fechavenc);
         unida.setText(": "+unid);
+
+        recetas=findViewById(R.id.btnrecetas);
+
+        recetas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Detalleproducto.this, recetas.class);
+                intent.putExtra("BUSCAR",nameprod );
+                startActivity(intent);
+            }
+        });
+
+
+
+
         chekactivo=false;
         if(consumido.equals("1")){
             aSwitch.setChecked(true);
             aSwitch.setClickable(false);
 
         }
+
+
 
         Picasso.get().load(imageurl).fit().centerInside().into(imageView);
         buttondetalle.setOnClickListener(new View.OnClickListener() {
